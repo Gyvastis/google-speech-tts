@@ -23,11 +23,6 @@ class Client
     private $audioOutputDir = './audio/';
 
     /**
-     * @var string
-     */
-    private $languageTag = 'en-US';
-
-    /**
      * Client constructor.
      * @param ClientInterface $httpClient
      */
@@ -69,14 +64,6 @@ class Client
     }
 
     /**
-     * @return string
-     */
-    public function getLanguageTag()
-    {
-        return $this->languageTag;
-    }
-
-    /**
      * @param string $languageTag
      */
     public function setLanguageTag($languageTag)
@@ -85,7 +72,7 @@ class Client
     }
 
     /**
-     * @param SpeechMp3File $speechFile
+     * @param SpeechFile $speechFile
      * @return bool
      */
     public function downloadAudio($speechFile)
@@ -93,7 +80,7 @@ class Client
         $speechFile->setPath($this->getAudioOutputDir());
 
         $response = $this->getHttpClient()->request('GET', $this->getGoogleTtsUrl(), [
-            'query' => $this->getQueryParams($speechFile->getText()),
+            'query' => $this->getQueryParams($speechFile),
             'headers' => $this->getHttpClientHeaders(),
             'save_to' => $speechFile->getFullPath()
         ]);
@@ -110,16 +97,16 @@ class Client
     }
 
     /**
-     * @param string $text
+     * @param SpeechMp3File $speechFile
      * @return array
      */
-    private function getQueryParams($text)
+    private function getQueryParams($speechFile)
     {
         return [
             'ie' => 'UTF-8',
-            'q' => $text,
+            'q' => $speechFile->getText(),
             'client' => 'tw-ob',
-            'tl' => $this->getLanguageTag()
+            'tl' => $speechFile->getLanguageTag()
         ];
     }
 

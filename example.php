@@ -11,12 +11,13 @@ if(!file_exists($audioOutputDir)) {
 
 $ttsClient = new \GoogleFree\TextToSpeech\Client($httpClient);
 $ttsClient->setAudioOutputDir($audioOutputDir);
-$ttsClient->setLanguageTag('en-US');
 
 try {
-    $speechFile = new \GoogleFree\TextToSpeech\SpeechMp3File('The freedom of speech');
+    $speechFile = new \GoogleFree\TextToSpeech\SpeechFile('The freedom of speech', 'en-US');
 
-    $ttsClient->downloadAudio($speechFile);
+    $didSucceed = $ttsClient->downloadAudio($speechFile);
+
+    var_dump($didSucceed ? 'Success!' : 'Argh! Something went wrong');
 }
 catch(\Exception $ex) {
     var_dump($ex->getMessage());
