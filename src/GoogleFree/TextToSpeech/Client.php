@@ -20,7 +20,7 @@ class Client
     /**
      * @var string
      */
-    private $audioOutputDir = './audio';
+    private $audioOutputDir = './audio/';
 
     /**
      * @var string
@@ -85,15 +85,17 @@ class Client
     }
 
     /**
-     * @param string $text
+     * @param SpeechMp3File $speechFile
      * @return bool
      */
-    public function downloadAudio($text)
+    public function downloadAudio($speechFile)
     {
+        $speechFile->setPath($this->getAudioOutputDir());
+
         $response = $this->getHttpClient()->request('GET', $this->getGoogleTtsUrl(), [
-            'query' => $this->getQueryParams($text),
+            'query' => $this->getQueryParams($speechFile->getText()),
             'headers' => $this->getHttpClientHeaders(),
-            'save_to' => $this->getAudioOutputDir()
+            'save_to' => $speechFile->getFullPath()
         ]);
 
         return $response->getStatusCode() == 200;

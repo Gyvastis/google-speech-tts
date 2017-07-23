@@ -1,7 +1,10 @@
 {
-    "name": "vaidas/google-speech-tts",
-    "description": "gyvastis/google-speech-tts",
+    "name": "gyvastis/google-speech-tts",
+    "description": "A wrapper for Google Translate to generate an audio from a text.",
     "require": {
         "guzzlehttp/guzzle": "^6.3"
+    },
+    "autoload": {
+        "psr-0": { "GoogleFree\\": "src/" }
     }
 }
