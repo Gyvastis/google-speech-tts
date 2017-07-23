@@ -24,6 +24,10 @@ $didSucceed = $ttsClient->downloadAudio($speechFile);
 
 3. `php example.php`
 
+## Language tags
+
+All available langauge tags can be found [here](https://cloud.google.com/speech/docs/languages).
+
 ## Credits
 
 This is an updated approach of [AlboVieira](https://github.com/AlboVieira/google-speech-tts).
