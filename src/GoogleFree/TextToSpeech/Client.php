@@ -10,7 +10,7 @@ class Client
     /**
      * @var string
      */
-    private $googleTtsUrl = 'http://translate.google.com/translate_tts';
+    private $googleTranslateUrl = 'http://translate.google.com/';
 
     /**
      * @var ClientInterface
@@ -39,9 +39,9 @@ class Client
     /**
      * @return string
      */
-    public function getGoogleTtsUrl()
+    public function getGoogleTranslateUrl()
     {
-        return $this->googleTtsUrl;
+        return $this->googleTranslateUrl;
     }
 
     /**
@@ -100,6 +100,14 @@ class Client
     }
 
     /**
+     * @return string
+     */
+    private function getGoogleTtsUrl()
+    {
+        return $this->getGoogleTranslateUrl() . 'translate_tts';
+    }
+
+    /**
      * @param string $text
      * @return array
      */
@@ -118,7 +126,7 @@ class Client
      */
     private function getHttpClientHeaders() {
         return [
-            'Referer' => 'http://translate.google.com/',
+            'Referer' => $this->getGoogleTranslateUrl(),
             'User-Agent'=> 'stagefright/1.2 (Linux;Android 5.0)',
             'Content-type' => 'audio/mpeg'
         ];
