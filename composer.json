@@ -1,0 +1,7 @@
+{
+    "name": "vaidas/google-speech-tts",
+    "description": "gyvastis/google-speech-tts",
+    "require": {
+        "guzzlehttp/guzzle": "^6.3"
+    }
+}
